@@ -1,8 +1,9 @@
+package Mastery;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class MetricConversion {
+public class BreakAPlate {
 
 	private JFrame frame;
 
@@ -13,7 +14,7 @@ public class MetricConversion {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MetricConversion window = new MetricConversion();
+					BreakAPlate window = new BreakAPlate();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,7 +26,7 @@ public class MetricConversion {
 	/**
 	 * Create the application.
 	 */
-	public MetricConversion() {
+	public BreakAPlate() {
 		initialize();
 	}
 
