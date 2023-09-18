@@ -1,42 +1,23 @@
 package SkillBuilder;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import java.util.Scanner;
 
 public class DivisibleBy3 {
 
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DivisibleBy3 window = new DivisibleBy3();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public DivisibleBy3() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public static void main(String[] args) 
+	{
+		Scanner Scan = new Scanner(System.in);
+		
+		System.out.print("Please enter your first grade: ");
+		double avg1 = Scan.nextInt();
+		
+		System.out.print("Please enter your second grade: ");
+		double avg2 = Scan.nextInt();
+		
+		System.out.print("Please enter your third grade: ");
+		double avg3 = Scan.nextInt();
+		
+		System.out.println("Your average is: " + (avg1+avg2+avg3)/3);
 	}
 
 }
