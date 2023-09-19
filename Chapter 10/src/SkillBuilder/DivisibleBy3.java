@@ -1,23 +1,88 @@
 package SkillBuilder;
 
-import java.util.Scanner;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DivisibleBy3 {
 
-	public static void main(String[] args) 
-	{
-		Scanner Scan = new Scanner(System.in);
-		
-		System.out.print("Please enter your first grade: ");
-		double avg1 = Scan.nextInt();
-		
-		System.out.print("Please enter your second grade: ");
-		double avg2 = Scan.nextInt();
-		
-		System.out.print("Please enter your third grade: ");
-		double avg3 = Scan.nextInt();
-		
-		System.out.println("Your average is: " + (avg1+avg2+avg3)/3);
+	private JFrame frame;
+	private JTextField uInput;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DivisibleBy3 window = new DivisibleBy3();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
+	/**
+	 * Create the application.
+	 */
+	public DivisibleBy3() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 151);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel Label = new JLabel("Please enter an integer:");
+		Label.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		Label.setBounds(10, 11, 168, 19);
+		frame.getContentPane().add(Label);
+		
+		uInput = new JTextField();
+		uInput.setBounds(188, 12, 236, 21);
+		frame.getContentPane().add(uInput);
+		uInput.setColumns(10);
+		
+		JButton Submit = new JButton("Submit");
+		Submit.setBackground(Color.WHITE);
+		Submit.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				int uNum = Integer.parseInt(uInput.getText());
+				
+				if (uNum % 3 == 0)
+					Display.setText(uNum + " is divisible by 3.");
+				else
+					Display.setText(uNum + " is not divisible by 3.");
+			}
+		});
+		Submit.setBounds(10, 41, 168, 60);
+		frame.getContentPane().add(Submit);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(188, 82, 236, 19);
+		frame.getContentPane().add(panel);
+		
+		JLabel Display = new JLabel("");
+		panel.add(Display);
+		Display.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+	}
 }
