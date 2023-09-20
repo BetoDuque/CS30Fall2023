@@ -8,17 +8,21 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class PhotoAlbum {
 
+	int currentPhoto = 0;
+	
 	private JFrame frame;
-	private JTextField fn;
-	private JTextField ln;
 
 	/**
 	 * Launch the application.
@@ -46,68 +50,83 @@ public class PhotoAlbum {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
+		ImageIcon image1 = new ImageIcon("..\\Chapter 10\\src\\Images\\firstImage.jpg");
+		ImageIcon image2 = new ImageIcon("..\\Chapter 10\\src\\Images\\secondImage.jpg");
+		ImageIcon image3 = new ImageIcon("..\\Chapter 10\\src\\Images\\thirdImage.jpg");
+		ImageIcon image4 = new ImageIcon("..\\Chapter 10\\src\\Images\\fourthImage.jpg");
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 414, 239);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JLabel display = new JLabel("");
+		display.setIcon(new ImageIcon(PhotoAlbum.class.getResource("/Images/firstImage.jpg")));
+		display.setHorizontalAlignment(SwingConstants.CENTER);
+		display.setBounds(10, 11, 414, 178);
+		frame.getContentPane().add(display);
 		
-		fn = new JTextField();
-		fn.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		fn.setText("First Name");
-		fn.setBounds(10, 11, 144, 40);
-		panel.add(fn);
-		fn.setColumns(10);
+		JButton back = new JButton("Back");
+		back.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				currentPhoto--;
+				if (currentPhoto < 1)
+					currentPhoto = 3;
+				
+				switch (currentPhoto)
+				{
+				case 0:
+					display.setIcon(image1);
+					break;
+				case 1:
+					display.setIcon(image2);
+					break;
+				case 2:
+					display.setIcon(image3);
+					break;
+				case 3:
+					display.setIcon(image4);
+					break;
+				}
+			}
+		});
+		back.setBackground(Color.WHITE);
+		back.setBounds(10, 200, 125, 50);
+		frame.getContentPane().add(back);
 		
-		ln = new JTextField();
-		ln.setText("Last Name");
-		ln.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		ln.setColumns(10);
-		ln.setBounds(260, 11, 144, 40);
-		panel.add(ln);
-		
-		JTextArea disp = new JTextArea();
-		disp.setBounds(10, 128, 394, 22);
-		panel.add(disp);
-		
-		JButton btnNewButton = new JButton("Submit");
-		btnNewButton.addActionListener(new ActionListener() 
+		JButton next = new JButton("Next");
+		next.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		next.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String fN = fn.getText();
-				String lN = ln.getText();
-				disp.setText(fN + " " + lN);
+				currentPhoto++;
+				if (currentPhoto > 3)
+					currentPhoto = 0;
 				
+				switch (currentPhoto)
+				{
+				case 0:
+					display.setIcon(image1);
+					break;
+				case 1:
+					display.setIcon(image2);
+					break;
+				case 2:
+					display.setIcon(image3);
+					break;
+				case 3:
+					display.setIcon(image4);
+					break;
+				}
 			}
 		});
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setForeground(Color.DARK_GRAY);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnNewButton.setBounds(10, 162, 394, 77);
-		panel.add(btnNewButton);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBackground(Color.LIGHT_GRAY);
-		comboBox.setForeground(Color.DARK_GRAY);
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Select Grade", "10", "11", "12"}));
-		comboBox.setBounds(10, 62, 144, 22);
-		panel.add(comboBox);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Select School", "Crescent", "Western", "Eastern", "Forest Lawn"}));
-		comboBox_1.setForeground(Color.DARK_GRAY);
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		comboBox_1.setBackground(Color.LIGHT_GRAY);
-		comboBox_1.setBounds(260, 62, 144, 22);
-		panel.add(comboBox_1);
-		
-
+		next.setBackground(Color.WHITE);
+		next.setBounds(299, 200, 125, 50);
+		frame.getContentPane().add(next);
 	}
 }

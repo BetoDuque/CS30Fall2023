@@ -59,6 +59,17 @@ public class DivisibleBy3 {
 		frame.getContentPane().add(uInput);
 		uInput.setColumns(10);
 		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(188, 82, 236, 19);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel Display = new JLabel("");
+		Display.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		Display.setBounds(0, 0, 236, 19);
+		panel.add(Display);
+		
 		JButton Submit = new JButton("Submit");
 		Submit.setBackground(Color.WHITE);
 		Submit.addActionListener(new ActionListener() 
@@ -75,14 +86,5 @@ public class DivisibleBy3 {
 		});
 		Submit.setBounds(10, 41, 168, 60);
 		frame.getContentPane().add(Submit);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(188, 82, 236, 19);
-		frame.getContentPane().add(panel);
-		
-		JLabel Display = new JLabel("");
-		panel.add(Display);
-		Display.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
 	}
 }
