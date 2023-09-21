@@ -12,18 +12,40 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Choice;
+import javax.swing.JMenuItem;
+import javax.swing.JToggleButton;
+import java.awt.Panel;
+import javax.swing.JTextPane;
+import javax.swing.UIManager;
 
 public class SemesterAvg {
 
 	private JFrame frame;
-	private JTextField uInput1;
-	private JTextField uInput2;
-	private JTextField uInput3;
+	private JMenuItem viewProject;
+	private Panel project;
+	private JPanel buttonRegion;
 	private JButton Average;
-	private JLabel Display;
-	private JPanel panel;
 	private JButton Low;
 	private JButton High;
+	private JPanel inputRegion;
+	private JLabel grade1Label;
+	private JLabel grade2Label;
+	private JLabel grade3Label;
+	private JTextField uInput2;
+	private JTextField uInput1;
+	private JTextField uInput3;
+	private JPanel outputRegion;
+	private JLabel Display;
+	private JPanel RL;
+	private JPanel information;
 
 	/**
 	 * Launch the application.
@@ -53,44 +75,106 @@ public class SemesterAvg {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBackground(Color.WHITE);
+		frame.setBounds(100, 100, 450, 315);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel grade1Label = new JLabel("Please enter your first grade:");
+		project = new Panel();
+		project.setLayout(null);
+		project.setBounds(10, 10, 414, 234);
+		frame.getContentPane().add(project);
+		
+		buttonRegion = new JPanel();
+		buttonRegion.setLayout(null);
+		buttonRegion.setBounds(0, 92, 155, 142);
+		project.add(buttonRegion);
+		
+		inputRegion = new JPanel();
+		inputRegion.setLayout(null);
+		inputRegion.setBounds(0, 0, 414, 81);
+		project.add(inputRegion);
+		
+		grade1Label = new JLabel("Please enter your first grade:");
 		grade1Label.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		grade1Label.setBounds(10, 11, 233, 19);
-		frame.getContentPane().add(grade1Label);
+		grade1Label.setBounds(0, 0, 202, 19);
+		inputRegion.add(grade1Label);
 		
-		uInput1 = new JTextField();
-		uInput1.setBounds(269, 12, 155, 20);
-		frame.getContentPane().add(uInput1);
-		uInput1.setColumns(10);
-		
-		JLabel grade2Label = new JLabel("Please enter your second grade:");
+		grade2Label = new JLabel("Please enter your second grade:");
 		grade2Label.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		grade2Label.setBounds(10, 41, 233, 19);
-		frame.getContentPane().add(grade2Label);
+		grade2Label.setBounds(0, 30, 233, 19);
+		inputRegion.add(grade2Label);
+		
+		grade3Label = new JLabel("Please enter your third grade:");
+		grade3Label.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		grade3Label.setBounds(0, 60, 233, 19);
+		inputRegion.add(grade3Label);
 		
 		uInput2 = new JTextField();
 		uInput2.setColumns(10);
-		uInput2.setBounds(269, 42, 155, 20);
-		frame.getContentPane().add(uInput2);
+		uInput2.setBounds(259, 31, 155, 20);
+		inputRegion.add(uInput2);
 		
-		JLabel grade3Label = new JLabel("Please enter your third grade:");
-		grade3Label.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
-		grade3Label.setBounds(10, 71, 233, 19);
-		frame.getContentPane().add(grade3Label);
+		uInput1 = new JTextField();
+		uInput1.setColumns(10);
+		uInput1.setBounds(259, 1, 155, 20);
+		inputRegion.add(uInput1);
 		
 		uInput3 = new JTextField();
 		uInput3.setColumns(10);
-		uInput3.setBounds(269, 72, 155, 20);
-		frame.getContentPane().add(uInput3);
+		uInput3.setBounds(259, 61, 155, 20);
+		inputRegion.add(uInput3);
+		
+		outputRegion = new JPanel();
+		outputRegion.setBackground(Color.WHITE);
+		outputRegion.setBounds(259, 194, 155, 40);
+		project.add(outputRegion);
+		
+		Display = new JLabel("");
+		Display.setHorizontalAlignment(SwingConstants.CENTER);
+		Display.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		outputRegion.add(Display);
+		
+		RL = new JPanel();
+		RL.setBounds(10, 10, 414, 233);
+		frame.getContentPane().add(RL);
+		RL.setLayout(null);
+		
+		information = new JPanel();
+		information.setBounds(0, 0, 414, 49);
+		RL.add(information);
+		information.setLayout(null);
+		
+		JLabel creditName = new JLabel("Credit Name: CSE3010 - Computer Science 3");
+		creditName.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		creditName.setBounds(0, 0, 414, 24);
+		information.add(creditName);
+		
+		JLabel assignName = new JLabel("Assignment Name: SemesterAvg");
+		assignName.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		assignName.setBounds(0, 25, 414, 24);
+		information.add(assignName);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 60, 414, 173);
+		RL.add(panel);
+		panel.setLayout(null);
+		
+		JTextPane text = new JTextPane();
+		text.setEditable(false);
+		text.setBackground(UIManager.getColor("Button.background"));
+		text.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc iaculis aliquam ipsum, non porta nisl tristique sit amet. Donec quis velit a arcu ornare feugiat ut et mi. Sed sed lobortis leo, ut volutpat ex. In nec elementum tellus. Donec vel velit tincidunt, tincidunt tortor id, egestas mi. Morbi eget sem laoreet, porttitor odio pulvinar, rutrum ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Ut interdum metus sit amet sapien tristique aliquam. Proin eu erat vel ante lobortis facilisis.");
+		text.setBounds(0, 0, 414, 173);
+		panel.add(text);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(Color.WHITE);
+		frame.setJMenuBar(menuBar);
 		
 		Average = new JButton("Find average");
-		Average.setBackground(Color.WHITE);
-		Average.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
+		Average.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
 			{
 				double avg1 = Double.parseDouble(uInput1.getText());
 				double avg2 = Double.parseDouble(uInput2.getText());
@@ -101,21 +185,13 @@ public class SemesterAvg {
 				Display.setText(Double.toString(realAverage));
 			}
 		});
-		Average.setBounds(10, 103, 155, 40);
-		frame.getContentPane().add(Average);
-		
-		panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(269, 154, 155, 40);
-		frame.getContentPane().add(panel);
-		
-		Display = new JLabel("");
-		panel.add(Display);
-		Display.setHorizontalAlignment(SwingConstants.CENTER);
-		Display.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		Average.setBackground(Color.WHITE);
+		Average.setBounds(0, 0, 155, 40);
+		buttonRegion.add(Average);
 		
 		Low = new JButton("Find lowest");
-		Low.addActionListener(new ActionListener() {
+		Low.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				double avg1 = Double.parseDouble(uInput1.getText());
@@ -131,8 +207,8 @@ public class SemesterAvg {
 			}
 		});
 		Low.setBackground(Color.WHITE);
-		Low.setBounds(10, 154, 155, 40);
-		frame.getContentPane().add(Low);
+		Low.setBounds(0, 51, 155, 40);
+		buttonRegion.add(Low);
 		
 		High = new JButton("Find highest");
 		High.addActionListener(new ActionListener() 
@@ -152,8 +228,53 @@ public class SemesterAvg {
 			}
 		});
 		High.setBackground(Color.WHITE);
-		High.setBounds(10, 205, 155, 40);
-		frame.getContentPane().add(High);
+		High.setBounds(0, 102, 155, 40);
+		buttonRegion.add(High);
+		
+		JMenu mnNewMenu = new JMenu("View");
+		mnNewMenu.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 12));
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem viewRL = new JMenuItem("View reflection log");
+		viewRL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				//Disables all buttons buttons before showing new buttons
+				project.setVisible(false);
+				RL.setVisible(true);
+				
+			}
+		});
+		
+		viewProject = new JMenuItem("View project");
+		viewProject.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 12));
+		viewProject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				project.setVisible(true);
+				RL.setVisible(false);
+				
+			}
+		});
+		mnNewMenu.add(viewProject);
+		viewRL.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 12));
+		mnNewMenu.add(viewRL);
 	}
-
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }
